@@ -17,3 +17,5 @@ run:
 ```bash
 docker-compose up
 ```
+
+To see the app, go to: `http://localhost:8080`
