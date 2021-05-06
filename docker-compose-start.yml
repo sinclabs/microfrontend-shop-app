@@ -4,44 +4,32 @@ services:
         extends:
             file: docker-compose-common.yml
             service: design-system
-        command: npm run dev
-        volumes: 
-            - "./design-system:/app"
+        command: npm start
     header-panel:
         extends:
             file: docker-compose-common.yml
             service: header-panel
-        command: npm run dev
-        volumes: 
-            - "./header-panel:/app"
+        command: npm start
     product-panel:
         extends:
             file: docker-compose-common.yml
             service: product-panel
-        command: npm run dev
-        volumes: 
-            - "./product-panel:/app"
+        command: npm start
     shopping-cart:
         extends:
             file: docker-compose-common.yml
             service: shopping-cart
-        command: npm run dev
-        volumes: 
-            - "./shopping-cart:/app"
+        command: npm start
     footer-panel:
         extends:
             file: docker-compose-common.yml
             service: footer-panel
-        command: npm run dev        
-        volumes: 
-            - "./footer-panel:/app"
+        command: npm start        
     container-app:
         build: 
             context: ./container-app
             dockerfile: Dockerfile
-        command: npm run dev
-        volumes: 
-            - "./container-app:/app"
+        command: npm start
         ports: 
             - 8080:3000
         depends_on:

@@ -1,0 +1,38 @@
+version: '3'
+services:
+    design-system:
+        build: 
+            context: ./design-system
+            dockerfile: Dockerfile
+        command: npm start
+        ports: 
+            - 8081:3000
+    header-panel:
+        build: 
+            context: ./header-panel
+            dockerfile: Dockerfile
+        command: npm start
+        ports: 
+            - 8082:3000
+    product-panel:
+        build: 
+            context: ./product-panel
+            dockerfile: Dockerfile
+        command: npm start
+        ports: 
+            - 8083:3000
+    shopping-cart:
+        build: 
+            context: ./shopping-cart
+            dockerfile: Dockerfile
+        command: npm start
+        ports: 
+            - 8084:3000
+    footer-panel:
+        build: 
+            context: ./footer-panel
+            dockerfile: Dockerfile
+        command: npm start
+        ports: 
+            - 8085:3000
+

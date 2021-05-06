@@ -13,9 +13,12 @@ clone the repo:
 git clone https://github.com/sinclabs/microfrontend-shop-app.git
 ```
 
-run:
+To run in dev mode (i.e. with file watches for changes):
 ```bash
 docker-compose up
 ```
+(If you just wanna start it and not have file watches for dev, then use `docker-compose -f docker-compose-start.yml up`)
 
-To see the app, go to: `http://localhost:8080`
+To see the app, go to: `http://localhost:8080`. (Dev mode only sets file watch to hot recompile and not hot reload. So chnges to the components will be rebuilt but you still need to reload the page in the browser manually to see the changes)
+
+For changes that might need the docker images to be rebuilt, use: `docker-compose up --build` or `docker-compose -f docker-compose-start.yml up --build` or simply `docker-compose build` (This will just build and not start the services)

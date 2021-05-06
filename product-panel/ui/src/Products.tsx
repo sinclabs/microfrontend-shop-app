@@ -16,7 +16,7 @@ const productsData = [
   },
   {
     id: "3",
-    name: "Great Product",
+    name: "Super Great Product",
     image: "https://picsum.photos/200/300?random=3",
     description: "This is a great product"
   }
