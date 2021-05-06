@@ -1,7 +1,14 @@
 import React from "react";
 import Product from "./Product";
 
-const productsData = [
+export interface IProduct {
+  id: string
+  name: string
+  image: string
+  description: string
+}
+
+const productsData: Array<IProduct> = [
   {
     id: "1",
     name: "Awesome Product",
@@ -30,11 +37,12 @@ const Products = () => <div style={{
 }}>
   {
     productsData.map(product => <Product
-      id={product.id}
-      name={product.name}
-      image={product.image}
-      description={product.description}
-      onAddToCart={(id: string) => console.log("Adding", id, product)} 
+      product={product}
+      key={product.id}
+      onAddToCart={(product: IProduct) => {
+        document.getElementsByTagName('shopping-cart')[0].dispatchEvent(new CustomEvent('itemAddedToCart', { detail: product }))
+        console.log("Adding", product)
+      }} 
     />)
   }
 </div>;

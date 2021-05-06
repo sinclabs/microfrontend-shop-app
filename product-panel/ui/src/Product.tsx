@@ -1,4 +1,5 @@
 import React from "react";
+import { IProduct } from "./Products";
 
 declare global {
     namespace JSX {
@@ -12,14 +13,11 @@ declare global {
 }
 
 export interface IProductProps {
-    id: string
-    name: string
-    image: string
-    description: string
-    onAddToCart: (id: string) => void
+    product: IProduct
+    onAddToCart: (id: IProduct) => void
 }
 
-const Product: React.FC<IProductProps> = ({ id, name, image, description, onAddToCart }) => (
+const Product: React.FC<IProductProps> = ({ product, onAddToCart }) => (
     <div style={{
         width: "clamp(23ch, 50%, 38ch)",
         display: "flex",
@@ -32,13 +30,13 @@ const Product: React.FC<IProductProps> = ({ id, name, image, description, onAddT
         fontFamily: "sans-serif",
         margin: "10px",
     }}>
-        <h1>{name}</h1>
-        <p>{description}</p>
+        <h1>{product.name}</h1>
+        <p>{product.description}</p>
         <img style={{
             height: "125px",
             width: "100%",
-        }} src={image} alt={name} />
-        <ds-button labelText={'Add to cart'} onClick={() => onAddToCart(id)} />
+        }} src={product.image} alt={product.name} />
+        <ds-button labelText={'Add to cart'} onClick={() => onAddToCart(product)} />
 
     </div>
 );

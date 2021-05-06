@@ -1,3 +1,11 @@
+interface IProduct {
+    id: string
+    name: string
+    image: string
+    description: string
+  }
+
+  
 class ShoppingCart extends HTMLElement {
     shadow: ShadowRoot
 
@@ -7,6 +15,16 @@ class ShoppingCart extends HTMLElement {
     }
 
     connectedCallback() {
+        this.addEventListener('itemAddedToCart', (e) => {
+            // @ts-ignore
+            const product: IProduct = e.detail
+            const li = document.createElement('li')
+            li.innerText = product.name
+            const ul = this.shadowRoot?.querySelector('ul')
+            if(ul !== null || ul !== undefined) {
+                ul?.append(li)
+            }
+        })
         this.render()
     }
 
@@ -33,6 +51,7 @@ class ShoppingCart extends HTMLElement {
             </style>
             <div class="shoppingCart">
                 <h1>Shopping Cart</h1>
+                <ul></ul>
                 <ds-button labelText="Place order"></ds-button>
             </div>
         `
