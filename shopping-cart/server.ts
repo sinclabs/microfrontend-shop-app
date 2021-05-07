@@ -25,8 +25,6 @@ import { createDBConnection, getCartModel } from "./db";
             if(error) {
                 return res.end(JSON.stringify({ error }))
             }
-            console.log(docs);
-            
             res.end(JSON.stringify(docs))
         })
     })
