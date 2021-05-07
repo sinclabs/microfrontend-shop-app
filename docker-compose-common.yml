@@ -35,4 +35,20 @@ services:
         command: npm start
         ports: 
             - 8085:3000
-
+    mongodb-server:
+        image: mongo:latest
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: rootpassword
+        ports:
+            - 27017:27017
+        volumes:
+            - mongodb-data:/data/db
+        networks:
+            - mongodb-network
+volumes:
+    mongodb-data:
+        name: mongodb-data
+networks:
+    mongodb-network:
+        name: mongodb-network

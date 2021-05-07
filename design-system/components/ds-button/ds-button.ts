@@ -6,18 +6,30 @@ class DSButton extends HTMLElement {
         this.shadow = this.attachShadow({mode: "open"})
     }
 
+    static get observedAttributes() {
+        return ['label', 'color'];
+    }
+
+    attributeChangedCallback(name: string, oldValue: any, newValue: any) {
+        const button = this.shadowRoot?.querySelector(".button") as HTMLButtonElement
+        switch (name) {
+            case 'label':
+                if(button) button.innerText = newValue
+                break;
+            case 'color':
+                if(button) {
+                    button.style.backgroundColor = newValue
+                    button.style.border = `0.15em solid ${newValue}`  
+                } 
+                break;
+        }
+      }
+
     connectedCallback() {
         this.render()
-    }
 
-    get labelText() {
-        return this.getAttribute('labelText');
-    }
-
-    set labelText(value) {
-        if(value) {
-            this.setAttribute('labelText', value);
-        }
+        this.setAttribute('label', this.getAttribute('label') ?? "");
+        this.setAttribute('color', this.getAttribute('color') ?? "#EF6461");
     }
 
     render() {
@@ -53,7 +65,7 @@ class DSButton extends HTMLElement {
                     }
                 }
             </style>
-            <button class="button">${this.getAttribute('labelText') ?? ""}</button>
+            <button class="button"></button>
         `
     }
 }

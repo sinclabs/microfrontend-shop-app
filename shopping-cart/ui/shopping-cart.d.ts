@@ -1,16 +1,16 @@
 import { LitElement } from 'lit';
-interface IProduct {
-    id: string;
+export interface ICartItem {
+    _id: string;
     name: string;
-    image: string;
-    description: string;
+    quantity: number;
 }
 /**
  * Shopping cart element.
  */
 declare class ShoppingCart extends LitElement {
     static styles: import("lit").CSSResultGroup;
-    products: Array<IProduct>;
+    cart: Array<ICartItem>;
+    updateCart(): void;
     connectedCallback(): void;
     render(): import("lit-html").TemplateResult<1>;
 }

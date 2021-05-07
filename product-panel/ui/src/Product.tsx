@@ -5,7 +5,7 @@ declare global {
     namespace JSX {
         interface IntrinsicElements {
             'ds-button': {
-                labelText: string
+                label: string
                 [key: string]: any
             };
         }
@@ -36,8 +36,17 @@ const Product: React.FC<IProductProps> = ({ product, onAddToCart }) => (
             height: "125px",
             width: "100%",
         }} src={product.image} alt={product.name} />
-        <ds-button labelText={'Add to cart'} onClick={() => onAddToCart(product)} />
-
+        <ds-button 
+            label={
+                product.isInCart ? 'Remove from cart' : 'Add to cart'
+            }
+            color={
+                product.isInCart ? '#EF6461' : '#377b37'
+            }
+            onClick={
+                () => onAddToCart(product)
+            } 
+        />
     </div>
 );
 

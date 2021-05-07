@@ -15,22 +15,30 @@ services:
             file: docker-compose-common.yml
             service: product-panel
         command: npm start
+        links:
+            - "mongodb-server:mongodb-server"
     shopping-cart:
         extends:
             file: docker-compose-common.yml
             service: shopping-cart
         command: npm start
+        links: 
+            - "mongodb-server:mongodb-server"
     footer-panel:
         extends:
             file: docker-compose-common.yml
             service: footer-panel
-        command: npm start        
+        command: npm start      
+    mongodb-server:
+        extends:
+            file: docker-compose-common.yml
+            service: mongodb-server
     container-app:
-        build: 
+        build:
             context: ./container-app
             dockerfile: Dockerfile
         command: npm start
-        ports: 
+        ports:
             - 8080:3000
         depends_on:
             - design-system
@@ -44,3 +52,9 @@ services:
             - "product-panel:product-panel"
             - "shopping-cart:shopping-cart"
             - "footer-panel:footer-panel"
+volumes:
+    mongodb-data:
+        name: mongodb-data
+networks:
+    mongodb-network:
+        name: mongodb-network

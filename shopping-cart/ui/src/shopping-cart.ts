@@ -1,11 +1,10 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-interface IProduct {
-    id: string
+export interface ICartItem {
+    _id: string
     name: string
-    image: string
-    description: string
+    quantity: number
 }
 
 /**
@@ -33,23 +32,32 @@ class ShoppingCart extends LitElement {
    `;
 
     @property({type: Array})
-    products: Array<IProduct> = [];
+    cart: Array<ICartItem> = [];
+
+    updateCart() {
+        fetch("http://localhost:8084/cart")
+            .then(res => res.json())
+            .then((cart: Array<ICartItem>) => {
+                this.setAttribute('cart', JSON.stringify([...cart]))
+            })
+            .catch(console.error)
+    }
 
     connectedCallback() {
         super.connectedCallback();
 
-        this.addEventListener('itemAddedToCart', (({ detail: product }: CustomEvent) => {
-            this.setAttribute('products', JSON.stringify([...this.products, product]))
-        }) as EventListener);
+        this.addEventListener('itemAddedToCart', () => this.updateCart());
+
+        this.updateCart()
     }
 
     render() {
-        const productTemplates = this.products.map(product => html`<li>${product.name}</li>`)
+        const productTemplates = this.cart.map(cartItem => html`<li>${cartItem.name}</li>`)
         return html`
             <div class="shoppingCart">
                 <h1>Shopping Cart</h1>
                 <ul> ${productTemplates} </ul>
-                <ds-button labelText="Place order"></ds-button>
+                <ds-button label="Place order"></ds-button>
             </div>            
         `;
     }    
