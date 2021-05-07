@@ -41,7 +41,6 @@ const Products = () => <div style={{
       key={product.id}
       onAddToCart={(product: IProduct) => {
         document.getElementsByTagName('shopping-cart')[0].dispatchEvent(new CustomEvent('itemAddedToCart', { detail: product }))
-        console.log("Adding", product)
       }} 
     />)
   }

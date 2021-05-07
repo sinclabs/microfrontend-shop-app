@@ -8,8 +8,6 @@ class ProductsPanel extends HTMLElement {
         const mountPoint = document.createElement('div');
         this.attachShadow({ mode: 'open' }).appendChild(mountPoint);
 
-        const name = this.getAttribute('name');
-        const url = 'https://www.google.com/search?q=' + encodeURIComponent(name ?? "");
         ReactDOM.render(<Products />, mountPoint);
     }
 }
