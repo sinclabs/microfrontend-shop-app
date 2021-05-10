@@ -20,6 +20,7 @@ services:
             service: product-panel
         command: npm run dev
         volumes: 
+            - product-panel_npm_deps:/app/ui/node_modules:ro
             - "./product-panel:/app"
         links: 
             - "mongodb-server:mongodb-server"
@@ -32,6 +33,7 @@ services:
             service: shopping-cart
         command: npm run dev
         volumes: 
+            - shopping-cart_npm_deps:/app/ui/node_modules:ro
             - "./shopping-cart:/app"
         links: 
             - "mongodb-server:mongodb-server"
@@ -103,6 +105,10 @@ services:
 volumes:
     mongodb-data:
         name: mongodb-data
+    product-panel_npm_deps:
+        name: product-panel_npm_deps
+    shopping-cart_npm_deps:
+        name: shopping-cart_npm_deps
 networks:
     mongodb-network:
         name: mongodb-network
