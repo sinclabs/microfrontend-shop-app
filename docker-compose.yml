@@ -25,6 +25,7 @@ services:
             - "mongodb-server:mongodb-server"
         networks:
             - mongodb-network
+            - nats
     shopping-cart:
         extends:
             file: docker-compose-common.yml
@@ -36,6 +37,7 @@ services:
             - "mongodb-server:mongodb-server"
         networks:
             - mongodb-network
+            - nats
     footer-panel:
         extends:
             file: docker-compose-common.yml
@@ -92,10 +94,17 @@ services:
             - "product-panel:product-panel"
             - "shopping-cart:shopping-cart"
             - "footer-panel:footer-panel"
+    nats:
+        image: nats
+        ports:
+        - "8222:8222"
+        networks: 
+            - nats
 volumes:
     mongodb-data:
         name: mongodb-data
 networks:
     mongodb-network:
         name: mongodb-network
-            
+    nats:
+        name: nats

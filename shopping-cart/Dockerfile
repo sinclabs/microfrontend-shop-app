@@ -6,6 +6,8 @@ COPY . .
 
 RUN npm install
 
+RUN cd ./ui/ && npm install
+
 RUN npm run build
 
 CMD [ "npm", "start" ]

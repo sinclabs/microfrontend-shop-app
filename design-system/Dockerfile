@@ -6,6 +6,8 @@ COPY . .
 
 RUN npm install
 
+RUN cd ./components/ds-button && npm install
+
 RUN npm run build
 
 CMD [ "npm", "start" ]

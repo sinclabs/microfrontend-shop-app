@@ -8,11 +8,11 @@ export interface ICartItem {
  * Shopping cart element.
  */
 declare class ShoppingCart extends LitElement {
-    static styles: import("lit").CSSResultGroup;
+    static styles: any;
     cart: Array<ICartItem>;
     updateCart(): void;
     connectedCallback(): void;
-    render(): import("lit-html").TemplateResult<1>;
+    render(): any;
 }
 declare global {
     interface HTMLElementTagNameMap {

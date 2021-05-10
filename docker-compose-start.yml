@@ -17,6 +17,8 @@ services:
         command: npm start
         links:
             - "mongodb-server:mongodb-server"
+        networks:
+            - mongodb-network
     shopping-cart:
         extends:
             file: docker-compose-common.yml
@@ -24,6 +26,8 @@ services:
         command: npm start
         links: 
             - "mongodb-server:mongodb-server"
+        networks:
+            - mongodb-network
     footer-panel:
         extends:
             file: docker-compose-common.yml
