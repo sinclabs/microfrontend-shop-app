@@ -6,6 +6,8 @@ services:
             service: design-system
         command: npm run dev
         volumes: 
+            - design-system_npm_deps:/app/node_modules:ro
+            - design-system_button_npm_deps:/app/components/ds-button/node_modules:ro
             - "./design-system:/app"
     header-panel:
         extends:
@@ -13,6 +15,8 @@ services:
             service: header-panel
         command: npm run dev
         volumes: 
+            - header-panel_npm_deps:/app/node_modules:ro
+            - header-panel_ui_npm_deps:/app/ui/node_modules:ro
             - "./header-panel:/app"
     product-panel:
         extends:
@@ -20,7 +24,8 @@ services:
             service: product-panel
         command: npm run dev
         volumes: 
-            - product-panel_npm_deps:/app/ui/node_modules:ro
+            - product-panel_npm_deps:/app/node_modules:ro
+            - product-panel_ui_npm_deps:/app/ui/node_modules:ro
             - "./product-panel:/app"
         links: 
             - "mongodb-server:mongodb-server"
@@ -33,7 +38,8 @@ services:
             service: shopping-cart
         command: npm run dev
         volumes: 
-            - shopping-cart_npm_deps:/app/ui/node_modules:ro
+            - shopping-cart_npm_deps:/app/node_modules:ro
+            - shopping-cart_ui_npm_deps:/app/ui/node_modules:ro
             - "./shopping-cart:/app"
         links: 
             - "mongodb-server:mongodb-server"
@@ -46,6 +52,8 @@ services:
             service: footer-panel
         command: npm run dev        
         volumes: 
+            - footer-panel_npm_deps:/app/node_modules:ro
+            - footer-panel_ui_npm_deps:/app/ui/node_modules:ro
             - "./footer-panel:/app"
     mongodb-server:
         extends:
@@ -81,6 +89,7 @@ services:
             dockerfile: Dockerfile
         command: npm run dev
         volumes: 
+            - container-app_npm_deps:/app/node_modules:ro
             - "./container-app:/app"
         ports: 
             - 8080:3000
@@ -105,10 +114,28 @@ services:
 volumes:
     mongodb-data:
         name: mongodb-data
+    design-system_npm_deps:
+        name: design-system_npm_deps
+    design-system_button_npm_deps:
+        name: design-system_button_npm_deps
+    header-panel_npm_deps:
+        name: header-panel_npm_deps
+    header-panel_ui_npm_deps:
+        name: header-panel_ui_npm_deps
     product-panel_npm_deps:
         name: product-panel_npm_deps
+    product-panel_ui_npm_deps:
+        name: product-panel_ui_npm_deps
     shopping-cart_npm_deps:
         name: shopping-cart_npm_deps
+    shopping-cart_ui_npm_deps:
+        name: shopping-cart_ui_npm_deps
+    footer-panel_npm_deps:
+        name: footer-panel_npm_deps
+    footer-panel_ui_npm_deps:
+        name: footer-panel_ui_npm_deps
+    container-app_npm_deps:
+        name: container-app_npm_deps
 networks:
     mongodb-network:
         name: mongodb-network
